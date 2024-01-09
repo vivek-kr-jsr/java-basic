@@ -2,10 +2,7 @@
 // then press Enter. You can now see whitespace characters in your code.
 //https://medium.com/dev-genius/java-8-coding-and-programming-interview-questions-and-answers-62512c44f062
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Arrays;
-import java.util.Set;
+import java.util.*;
 
 //Given a list of integers, find out all the even numbers that exist in the list using Stream functions?
 public class Main {
@@ -47,7 +44,10 @@ public class Main {
         System.out.println(myList1.stream().count());
 
         //Given a list of integers, find the maximum value element present in it using Stream functions?
-        myList1.stream().max((x,y)->Integer.compare(x,y)).ifPresent(maxVal->System.out.println("Maximum value: "+ maxVal));
+        myList1.stream().max(Comparator.comparingInt(x -> x)).ifPresent(maxVal->System.out.println("Maximum value: "+ maxVal));
+
+        //Output:
+        //Maximum value: 98
 
     }
 }
