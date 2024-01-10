@@ -49,5 +49,40 @@ public class Main {
         //Output:
         //Maximum value: 98
 
+        //Given a String, find the first non-repeated character in it using Stream functions?
+
+        String input = "Java articles are Awesome";
+
+        Map<Character,Long> charCount = input.chars()
+                .mapToObj(c->(char) c).collect(
+                        LinkedHashMap::new, (map,c) -> map.merge(c,1L,Long::sum),
+                        LinkedHashMap::putAll
+                );
+        Optional<Character> firstNonRepeat = charCount
+                .entrySet()
+                .stream().filter(enrty->enrty.getValue() == 1)
+                .map(Map.Entry::getKey)
+                .findFirst();
+        if (firstNonRepeat.isPresent()) {
+            System.out.println("First non-repeated character: " + firstNonRepeat.get());
+        } else {
+            System.out.println("No non-repeated characters found.");
+        }
+        //Output: First non-repeated character: J
+
+        //Given a String, find the first repeated character in it using Stream functions?
+
+        Optional<Character> firstRepeat = charCount
+                .entrySet()
+                .stream().filter(enrty->enrty.getValue() > 1)
+                .map(Map.Entry::getKey)
+                .findFirst();
+        if (firstNonRepeat.isPresent()) {
+            System.out.println("First non-repeated character: " + firstRepeat.get());
+        } else {
+            System.out.println("No non-repeated characters found.");
+        }
+
+        //Output: First non-repeated character: a
     }
 }
